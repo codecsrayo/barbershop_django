@@ -29,8 +29,8 @@
                     <div class="card-body card-body-3-productos-home">
                         <h4 class="card-title text-truncate">{{p.nombre}}</h4>
                         <h2 class="card-title text-truncate">${{p.precio}}</h2>
-                        <p class="card-text ">{{p.descripcion}}</p>
-                        <a href="#" class="btn btn-success btn-block">Comprar</a>
+                        <p class="card-text ">{{p.descripcion|truncatechars:100}}</p>
+                        <a href="{% url 'cita'%}" class="btn btn-success btn-block">Comprar</a>
                         
                        
                     </div>

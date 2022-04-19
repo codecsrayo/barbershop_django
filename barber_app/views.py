@@ -5,7 +5,8 @@ from .forms import CustomUserCretionForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
-from .models import Catalogo
+from .models import Catalogo, Citas
+from .forms import CitasForm
 
 def main_page(request):
     cortes = Catalogo.objects.all()
@@ -16,25 +17,6 @@ def main_page(request):
     
     return render(request, 'barber_app/index.html', data)
 	
-# def all_news_page(request):
-# 	all_news = News.objects.all()
-# 	return render(request, 'barber_app/news.html', {'all_news': all_news})
-	
-# def price_page(request):
-# 	return render(request, 'barber_app/price.html')
-
-# def shop_page(request):
-# 	return render(request, 'barber_app/shop.html')
-
-# def item_page(request):
-# 	return render(request, 'barber_app/item.html')
-
-# class NewsDetail(View):
-# 	def get(self, request, slug):
-# 		news = get_object_or_404(News, slug__iexact=slug)
-# 		return render(request, 'barber_app/news_detail.html', {'news': news})
-
-
 
 def registro(request):
     
@@ -55,3 +37,23 @@ def registro(request):
         data['form'] = formulario
         
     return render(request, 'registration/registro.html', data)
+
+
+
+def cita(request):
+    
+    data = {
+        'form': CitasForm()
+    }
+    
+    
+    if request.method == 'POST':
+        formulario = CitasForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mesaje"] = "contacto guardado"
+        else:
+            data["form"] = formulario
+            data["mesaje"] = "No fuesposible guardar el contacto.."
+    
+    return render(request, 'barber_app/cita.html', data)

@@ -1,0 +1,34 @@
+{% extends 'barber_app/barber_base.html'%} 
+{% block content %} 
+{% load crispy_forms_tags %}
+<br />
+<br />
+<div class="row">
+  <div class="col-12 col-nd-6 offset-nd-3">
+    <div class="card">
+      <div class="card-body">
+        <h2>Cita</h2>
+        <hr />
+        <form action="" class="" method="post">
+          {% csrf_token %} {{form | crispy}}
+          <hr />
+
+          <br />
+          <div class="d-flex justify-content-end">
+            <input onclick="location.href='{% url 'main_page_url' %}'" type="reset" value="Cancelar" class="btn btn-secondary" />
+            &nbsp;
+            <button type="submit" id="btnEnviar" class="btn btn-primary">
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{mesaje}}
+
+<table id="tablacontactos"></table>
+
+{%endblock%}

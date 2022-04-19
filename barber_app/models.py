@@ -1,5 +1,6 @@
 from django.db import models
 from django.shortcuts import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 # class News(models.Model):
@@ -24,3 +25,19 @@ class Catalogo(models.Model):
     
     def __str__(self):
         return self.nombre
+    
+
+
+class Empleado(models.Model):
+    nombre = models.CharField(max_length=50)
+    cargo = models.CharField(max_length=50)
+    sueldo = models.IntegerField()
+    
+    def __str__(self):
+        return self.nombre
+    
+class Citas(models.Model):
+    nombre_cliente =  models.CharField(max_length=50)
+    corte = models.ForeignKey(Catalogo, on_delete=models.CASCADE)    
+    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, related_name="empleado")
+    precio = models.IntegerField()

@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import *
+from .views import main_page, registro, cita
 
 urlpatterns = [
 	path('', main_page, name='main_page_url'),
  	path('registro/', registro, name='registro'),
+  	path('cita/', cita, name='cita'), 
 	# path('news/', all_news_page, name='all_news_url'),
 	# path('news/<str:slug>/', NewsDetail.as_view(), name='news_page_url'),
 	# path('price/', price_page, name='price_page_url'),
