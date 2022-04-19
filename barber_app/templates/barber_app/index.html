@@ -9,33 +9,38 @@
    
     {% load humanize%}
 
-
-
-<h2 style="color: white;">Cortes</h2>
-
-<div class="Cortes">
-    
-    {% for p in corte%}
-    <div class="cortes" style="color: red;">
-        
-        <div class="contenedor_cortes">
-        
-            {% if p.imagen%}
-                <img src="{{ p.imagen.url }}" alt="imagen corte">
-            {% endif %}
-
-            <div class="detalle">
-                <h3>{{p.nombre | capfirst}}</h3>
-                <p>{{p.descripcion}}</p>
-                <h5>{{p.precio | intcomma}} Pesos</h5>
-            </div>
-
-         
+        <!-- Titulo -->
+        <div class="col-12 mb-4 ">
+            <h1 class="display-4 text-center" style="color :white;">Cortes</h1>
         </div>
 
-        
-    </div>
-    {% endfor %}
-</div>
+        <!-- Cortes -->
+        {% for p in corte %}
+            <div class="col-8 col-sm-6 col-md-4 mb-3">
+                <div class="card card-img-3-producto-home">
+                    <div class=" h-100 ">
+                        <!-- src="https://picsum.photos/200/200?random={{ forloop.counter }}" -->
+                        <img 
+                        class="card-img-top mx-auto"
+                        src="{{MEDIA_URL}}{{p.imagen.url}}"
+                        alt="{{p.nombre}}"
+                        >
+                    </div>
+                    <div class="card-body card-body-3-productos-home">
+                        <h4 class="card-title text-truncate">{{p.nombre}}</h4>
+                        <h2 class="card-title text-truncate">${{p.precio}}</h2>
+                        <p class="card-text ">{{p.descripcion}}</p>
+                        <a href="#" class="btn btn-success btn-block">Comprar</a>
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+
+
+
+
 
 {% endblock %}
