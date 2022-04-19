@@ -7,22 +7,32 @@
 				{% if url_name != 'main_page_url' %}
 					<a class="logo-inner" href="{% url 'main_page_url' %}">
 					<img src="{% static 'images/inner-logo.png' %}" width="111"
-					height="24" alt="Барбершоп Бородинский">
+					height="24" alt="Peliqueria Bremen">
 					</a>
 				{% endif %}
 				
 				
 				<ul>
-					<li class="{% if url_name == 'main_page_url' %}active{% endif %}"><a href="{% url 'main_page_url' %}">Информация</a></li>
-					<li class="{% if url_name == 'news_page_url' %}active{% endif %}"><a href="{% url 'all_news_url' %}">Новости</a></li>        
-					<li class="{% if url_name == 'price_page_url' %}active{% endif %}"><a href="{% url 'price_page_url' %}">Прайс-лист</a></li>        
-					<li class="{% if url_name == 'shop_page_url' %}active{% endif %}"><a href="{% url 'shop_page_url' %}">Магазин</a></li>        
-					<li><a href="#">Контакты</a></li>
+					<li class="informacion"><a href="#">Información</a></li>
+					<li class="noticias"><a href="#">Noticias</a></li>        
+					<li class="Lista_precios"><a href="#">Lista de precios</a></li>        
+					<li class="tienda"><a href="#">Tienda</a></li>        
+					<li><a href="#">Contactos</a></li>
+
 				</ul>
 			{% endwith %}
         </nav>
         <div class="user-block">
-            <a class="login" href="#">Вход</a>
+			{% if user.is_authenticated %}
+            	
+				<li><a  href="{% url 'logout'%}">@{{ user.username }} Cerrar Sesión</a></li>
+			
+			{% else %}
+				<a class="login" href="{% url 'login' %}">Entrada</a>
+			
+			{% endif %}
         </div>
+
+
     </div>
 </header>
