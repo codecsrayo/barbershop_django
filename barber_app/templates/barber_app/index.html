@@ -19,16 +19,18 @@
             <div class="col-8 col-sm-6 col-md-4 mb-3">
                 <div class="card card-img-3-producto-home">
                     <div class=" h-100 ">
-                        <!-- src="https://picsum.photos/200/200?random={{ forloop.counter }}" -->
+                        
+                        {% if p.imagen%}
                         <img 
-                        class="card-img-top mx-auto"
-                        src="{{MEDIA_URL}}{{p.imagen.url}}"
-                        alt="{{p.nombre}}"
+                            class="card-img-top mx-auto"
+                            src="{{MEDIA_URL}}{{p.imagen.url}}"
+                            alt="{{p.nombre}}"
                         >
+                        {% endif %}
                     </div>
                     <div class="card-body card-body-3-productos-home">
-                        <h4 class="card-title text-truncate">{{p.nombre}}</h4>
-                        <h2 class="card-title text-truncate">${{p.precio}}</h2>
+                        <h2 class="card-title text-truncate">{{p.nombre}}</h2>
+                        <h4 class="card-title text-truncate">${{p.precio}}</h4>
                         <p class="card-text ">{{p.descripcion|truncatechars:100}}</p>
                         <a href="{% url 'cita'%}" class="btn btn-success btn-block">Comprar</a>
                         

@@ -1,13 +1,13 @@
 from django.urls import path
-from .views import main_page, registro, cita
+from .views import agregar_cortes, main_page, registro, cita,  agregar_cortes, listar_cortes, modificar_cortes, eliminar_cortes
 
 urlpatterns = [
 	path('', main_page, name='main_page_url'),
  	path('registro/', registro, name='registro'),
-  	path('cita/', cita, name='cita'), 
-	# path('news/', all_news_page, name='all_news_url'),
-	# path('news/<str:slug>/', NewsDetail.as_view(), name='news_page_url'),
-	# path('price/', price_page, name='price_page_url'),
-	# path('shop/', shop_page, name='shop_page_url'),
-	# path('shop/item/', item_page, name='item_page_url'),
+  	path('cita/', cita, name='cita'),
+	path('agregar-corte/', agregar_cortes, name='agregar_cortes'),
+	path('listar-cortes/', listar_cortes, name='listar_cortes'),
+	path('modificar-cortes/<id>/', modificar_cortes, name='modificar_cortes'),
+	path('eliminar-cortes/<id>/', eliminar_cortes, name='eliminar-cortes'),
+
 ]

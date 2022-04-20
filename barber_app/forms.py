@@ -13,10 +13,11 @@ class CustomUserCretionForm(UserCreationForm):
         
 
 class CatalogoForm(forms.ModelForm):
-        class Meta:
-            model = Catalogo
-            fields = ['nombre', 'precio', 'imagen']
-            
+    imagen = forms.ImageField(required=False)
+    class Meta:
+        model = Catalogo
+        fields = '__all__'#['nombre', 'precio', 'imagen']
+        
 
 
 class CitasForm(forms.ModelForm):

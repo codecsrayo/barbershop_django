@@ -41,3 +41,4 @@ class Citas(models.Model):
     corte = models.ForeignKey(Catalogo, on_delete=models.CASCADE)    
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, related_name="empleado")
     precio = models.IntegerField()
+
