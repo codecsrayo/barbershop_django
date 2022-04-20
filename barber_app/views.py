@@ -90,7 +90,7 @@ def listar_cortes(request):
     page = request.GET.get('page', 1)
     
     try:
-        paginator = Paginator(cortes, 2)
+        paginator = Paginator(cortes, 5)
         cortes = paginator.page(page)
         
     except:
