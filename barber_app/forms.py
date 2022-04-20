@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Catalogo, Citas
+from .models import Catalogo, Citas, Empleado
 
 
 
@@ -24,4 +24,11 @@ class CitasForm(forms.ModelForm):
         class Meta:
             model = Citas
             fields = ['nombre_cliente', 'corte', 'empleado', 'precio']
-            
+
+
+class EmpleadoForm(forms.ModelForm):
+
+    class Meta:
+        model = Empleado
+        fields = '__all__'#['nombre', 'precio', 'imagen']
+        

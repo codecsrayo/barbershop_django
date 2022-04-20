@@ -7,8 +7,8 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
-from .models import Catalogo, Citas
-from .forms import CitasForm, CatalogoForm
+from .models import Catalogo, Citas, Empleado
+from .forms import CitasForm, CatalogoForm, EmpleadoForm
 
 def main_page(request):
     cortes = Catalogo.objects.all()
@@ -64,7 +64,9 @@ def cita(request):
 
 
 
-
+################
+## Cortes ######
+################
 
 
 #@permission_required('barber_app.add_producto')
@@ -129,3 +131,70 @@ def eliminar_cortes(request, id):
     messages.success(request, "Eliminado correctamente")
     return redirect(to="listar_cortes")
 
+
+
+################
+## Empleados ###
+################
+
+#@permission_required('barber_app.add_producto')
+def agregar_empleados(request):
+    
+    data = {
+        'form': EmpleadoForm()
+    }
+    
+    if request.method == 'POST':
+        formulario = EmpleadoForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Empleado agregado correctamente.")
+        else:       
+            data["form"] = formulario
+            data["mesaje"] = "No fuesposible guardar el contacto.."
+    return render(request, 'barber_app/empleados/agregar.html', data)
+
+#@permission_required('barber_app.view_producto')
+def listar_empleados(request):
+    empleados = Empleado.objects.all()
+    page = request.GET.get('page', 1)
+    
+    try:
+        paginator = Paginator(empleados, 5)
+        empleados = paginator.page(page)
+        
+    except:
+        raise Http404
+    
+    
+    data = {
+        'entity': empleados,
+        'paginator': paginator
+    }
+    
+    return render(request, 'barber_app/empleados/listar.html', data)
+
+#@permission_required('barber_app.change_producto')
+def modificar_empleados(request, id):
+    empleado = get_object_or_404(Empleado, id=id)
+    
+    data={
+        'form': CatalogoForm(instance=empleado)
+    }
+    
+    if request.method =='POST':
+        formulario = EmpleadoForm(data=request.POST, instance=empleado, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save
+            messages.success(request, "Modificado correctamente")
+            return redirect(to="listar_empleados")
+        data['form'] = formulario
+        
+    return render(request, 'barber_app/empleados/modificar.html', data)
+
+#@permission_required('barber_app.delete_producto')
+def eliminar_empleados(request, id):
+    empleado = get_object_or_404(Empleado, id=id)
+    empleado.delete()
+    messages.success(request, "Eliminado correctamente")
+    return redirect(to="listar_empleados")

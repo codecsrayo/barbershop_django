@@ -1,0 +1,84 @@
+{% extends 'barber_app/barber_base.html' %} 
+
+{% block js %}
+
+<script>
+    function eliminarEmpleado(id) {
+        Swal.fire(
+                {
+                    "title": "¿Estas seguro?",
+                    "text": "Esta acción no se puede deshacer",
+                    "icon": "question",
+                    "showCancelButton": true,
+                    "cancelButtonText": "No, Cancelar",
+                    "confirmButtonText": "Si, Eliminar",
+                    "reverseButtons": false,
+                    "confirmButtonColor": "#dc3545"
+
+
+
+                }
+                ).then(function(result){
+                    if(result.isConfirmed){
+                        window.location.href = "/eliminar-empleados/"+id+"/"
+                    }
+                }
+                
+                )
+    }
+</script>
+
+{% endblock%}
+
+{% block content %}
+
+{% load humanize%}
+<br>
+<br>
+<div class="card">
+    <div class="card-body">
+
+        <h2> Listado de empleados </h2>
+        <hr>
+
+        <table class="table table-striped table-hover table-responsive-sm">
+            <tr>
+                <th>Nombre</th>
+                <th>Cargo</th>
+                <th>Sueldo</th>
+
+
+        
+                </tr>
+                {% for p in entity%}
+            
+                <tr>
+                <td> {{p.nombre | title}}</td>
+                <td> {{p.cargo | title }}</td>
+                <td> {{p.sueldo | intcomma}} Pesos</td>
+                
+
+
+               
+
+                <td>
+                        <a href="{% url 'modificar_empleados' p.id %}" class="btn btn-info btn-sm">Modifcar</a>
+                        <a href="#" onclick="eliminarEmpleado({{ p.id }})" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+        
+        
+        </tr>
+        
+        {% endfor%}
+        </table>
+
+        <hr>
+        <div>
+            {% include 'barber_app/paginator.html' %}
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock  %}
