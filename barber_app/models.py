@@ -43,5 +43,5 @@ class Citas(models.Model):
     precio = models.IntegerField()
     
     def __str__(self):
-        return self.nombre
+        return self.nombre_cliente
 
