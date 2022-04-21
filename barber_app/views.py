@@ -179,7 +179,7 @@ def modificar_empleados(request, id):
     empleado = get_object_or_404(Empleado, id=id)
     
     data={
-        'form': CatalogoForm(instance=empleado)
+        'form': EmpleadoForm(instance=empleado)
     }
     
     if request.method =='POST':
